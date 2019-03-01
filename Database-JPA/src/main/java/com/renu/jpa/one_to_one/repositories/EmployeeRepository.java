@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.renu.jpa.one_to_one.models.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long>,JpaSpecificationExecutor<Employee>{
-
+Employee getById(Long id);
 	
 	
 }

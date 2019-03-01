@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class AccountEntity extends TimeEntity<Long> {
 
@@ -16,6 +18,7 @@ public class AccountEntity extends TimeEntity<Long> {
 	private String accountNumber;
 
 	@ManyToOne
+	@JsonIgnore
 	private EmployeeEntity employee;
 
 	public AccountEntity() {

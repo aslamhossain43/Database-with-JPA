@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Account extends TimeEntity<Long> {
 @Id
@@ -13,6 +15,7 @@ public class Account extends TimeEntity<Long> {
 private Long id;
 private String accountNumber;
 @OneToOne(mappedBy="account")
+@JsonIgnore
 private Employee employee;
 public Account() {}
 @Override

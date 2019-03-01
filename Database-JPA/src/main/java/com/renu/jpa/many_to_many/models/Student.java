@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Student extends TimeEntity<Long> {
 	@Id
@@ -15,6 +17,7 @@ public class Student extends TimeEntity<Long> {
 	private Long id;
 	private String name;
 	@ManyToMany(mappedBy="students")
+	@JsonIgnore
 	private Set<Teacher>teachers;
 	
 	public Student() {}
