@@ -31,7 +31,7 @@ public class OneToMany {
 //------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/add")
 	public ResponseEntity<?> add(@RequestBody EmployeeAccountCombinedEntity employeeAccountCombinedEntity) {
-		LOGGER.info("From class UsinForeignKeyAssociation,method : add()---enter---");
+		LOGGER.info("From class OneToMany,method : add()---enter---");
 		employeeAccountCombinedEntity.getEmployeeEntity().setAccounts(employeeAccountCombinedEntity.getAccountEntities());
 		employeeAccountCombinedEntity.getAccountEntities().forEach(x->x.setEmployee(employeeAccountCombinedEntity.getEmployeeEntity()));
 		employeeEntityRepository.save(employeeAccountCombinedEntity.getEmployeeEntity());
@@ -40,7 +40,7 @@ public class OneToMany {
 	//----------------------------------------------------------------------------------------
 	@RequestMapping(value = "/getAll")
 	public ResponseEntity<?> getAll() {
-		LOGGER.info("From class UsinForeignKeyAssociation,method : getAll()---enter---");
+		LOGGER.info("From class OneToMany,method : getAll()---enter---");
 		List<EmployeeEntity>employeeEntities=employeeEntityRepository.findAll();
 		
 		return ResponseEntity.ok().body(employeeEntities);
@@ -48,7 +48,7 @@ public class OneToMany {
 	//----------------------------------------------------------------------------------------
 		@RequestMapping(value = "/get/{id}")
 		public ResponseEntity<?> getById(@PathVariable("id")Long id) {
-			LOGGER.info("From class UsinForeignKeyAssociation,method : getById()---enter---");
+			LOGGER.info("From class OneToMany,method : getById()---enter---");
 			EmployeeEntity employeeEntity=employeeEntityRepository.getById(id);
 			
 			return ResponseEntity.ok().body(employeeEntity);
@@ -56,7 +56,7 @@ public class OneToMany {
 		//----------------------------------------------------------------------------------------
 				@RequestMapping(value = "/delete/{id}")
 				public ResponseEntity<?> deleteById(@PathVariable("id")Long id) {
-					LOGGER.info("From class UsinForeignKeyAssociation,method : deleteById()---enter---");
+					LOGGER.info("From class OneToMany,method : deleteById()---enter---");
 					EmployeeEntity employeeEntity=employeeEntityRepository.getById(id);
 					employeeEntityRepository.delete(employeeEntity);
 					return ResponseEntity.ok().body("---DELETED ID : "+id);
