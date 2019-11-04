@@ -32,6 +32,7 @@ public class OneToMany {
 	@RequestMapping(value = "/add")
 	public ResponseEntity<?> add(@RequestBody EmployeeAccountCombinedEntity employeeAccountCombinedEntity) {
 		LOGGER.info("From class OneToMany,method : add()---enter---");
+		//MODEL ID OF YOUR CLIENT SIDE MUST BE NULL OTHERWISE ERROR AND MODEL AND ALL CLASS NAME SHOULD SAME AS CLIENT SIDE TO WORK EASILY
 		employeeAccountCombinedEntity.getEmployeeEntity().setAccounts(employeeAccountCombinedEntity.getAccountEntities());
 		employeeAccountCombinedEntity.getAccountEntities().forEach(x->x.setEmployee(employeeAccountCombinedEntity.getEmployeeEntity()));
 		employeeEntityRepository.save(employeeAccountCombinedEntity.getEmployeeEntity());
