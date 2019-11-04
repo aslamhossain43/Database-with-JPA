@@ -33,6 +33,7 @@ public class ManyToMany {
 	@RequestMapping(value = "/add")
 	public ResponseEntity<?> addManyToMany(@RequestBody TeacherStudentCombined teacherStudentCombined) {
 		LOGGER.info("From class ManyToMany,method : addManyToMany()--ENTER----");
+		//MODEL ID OF YOUR CLIENT SIDE MUST BE NULL OTHERWISE ERROR AND MODEL AND ALL CLASS NAME SHOULD SAME AS CLIENT SIDE TO WORK EASILY
 		teacherStudentCombined.getTeachers().forEach(x -> x.setStudents(teacherStudentCombined.getStudents()));
 		teacherRepository.saveAll(teacherStudentCombined.getTeachers());
 
