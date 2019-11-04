@@ -33,6 +33,7 @@ AccountRepository accountRepository;
 @RequestMapping(value="/add")
 public ResponseEntity<?>add(@RequestBody EmployeeAccountCombined employeeAccountCombined){
 	LOGGER.info(" From class OneToOne,method : add()---ENTER----- ");
+	//MODEL ID OF YOUR CLIENT SIDE MUST BE NULL OTHERWISE ERROR AND MODEL AND ALL CLASS NAME SHOULD SAME AS CLIENT SIDE TO WORK EASILY
 	employeeAccountCombined.getEmployee().setAccount(employeeAccountCombined.getAccount());
 	employeeAccountCombined.getAccount().setEmployee(employeeAccountCombined.getEmployee());
 	employeeRepository.save(employeeAccountCombined.getEmployee());
