@@ -2,8 +2,8 @@
 ## Technologies : Spring boot,jpa,mysql,hibernate
 -------------------------------------------------------Read Carefully-------------------------------
 ### CascadeType
-1. CascadeType.ALL means if we insert, delete anything in owner entity then it occures in child entity
-2. If we use specific type then it occures for that type only
+1. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity
+2. If we use specific type then it effects for that type only
 
 ### FaceType
 1. Default type is LAZY
