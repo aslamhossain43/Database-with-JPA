@@ -24,13 +24,13 @@ NORMALIZATION is a database design technique that reduces data redundancy and el
 ### Database Normal Forms
 Here is a list of Normal Forms
 
-1NF (First Normal Form)
-2NF (Second Normal Form)
-3NF (Third Normal Form)
-BCNF (Boyce-Codd Normal Form)
-4NF (Fourth Normal Form)
-5NF (Fifth Normal Form)
-6NF (Sixth Normal Form)
+>1NF (First Normal Form)
+>2NF (Second Normal Form)
+>3NF (Third Normal Form)
+>BCNF (Boyce-Codd Normal Form)
+>4NF (Fourth Normal Form)
+>5NF (Fifth Normal Form)
+>6NF (Sixth Normal Form)
 
 
 ## 1NF (First Normal Form)
