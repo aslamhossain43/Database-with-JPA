@@ -34,9 +34,21 @@ Here is a list of Normal Forms
 
 
 ## 1NF (First Normal Form)
-1. Each table cell should contain a single value.
-2. Columns name should be unique.
+1. Each attribute/column name must be unique.
+2. Each cell should contain a single value.
+3. Each row must be unique.
+4. Choose a primary key(if not possible then choose a candidate key)
 
+## Prime attributes 
+The attributes which are used to form a candidate key are called prime attributes.
+## Non-Prime attributes 
+The attributes which are not used to form a candidate key are called non-prime attributes.
+## Functional dependency
+X->Y here value of Y depends on X. It is called functional dependency.
+## Partial dependency
+If a,b prime attributes and c non-prime attributes then if c depends either a or b then it is called partial dependency.
+## Transitive dependency
+If X->Y and Y->Z then we can say X->Z this is called transitive dependency
 
 ## 2NF (Second Normal Form)
 1. It should be 1NF.
@@ -45,6 +57,7 @@ Here is a list of Normal Forms
 ## 3NF (Third Normal Form)
 1. It should be 2NF.
 2. It doesn't have transitive dependency.
+3. All transitive dependencies is removed to place in another table.
 
 
 
