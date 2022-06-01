@@ -2,6 +2,7 @@
 ## Technologies : Spring boot,jpa,mysql,hibernate
 -------------------------------------------------------Read Carefully-------------------------------
 ## Parent
+```
 @Entity
 public class Person {
     @Id
@@ -11,7 +12,9 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Address> addresses;
 }
+```
 ## Child
+```
 @Entity
 public class Address {
     @Id
@@ -24,7 +27,7 @@ public class Address {
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
 }
-  
+``` 
 ### CascadeType
 1. It is used in parent side.
 2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity.
