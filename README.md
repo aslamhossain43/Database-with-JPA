@@ -1,20 +1,56 @@
 # Database-with-JPA
 ## Technologies : Spring boot,jpa,mysql,hibernate
 -------------------------------------------------------Read Carefully-------------------------------
+## Parent
+@Entity
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String name;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Address> addresses;
+}
+## Child
+@Entity
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String street;
+    private int houseNumber;
+    private String city;
+    private int zipCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Person person;
+}
+  
 ### CascadeType
-1. It is used in parent side
-2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity
-3. If we use specific type then it effects for that type only
+1. It is used in parent side.
+2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity.
+3. If we use specific type then it effects for that type only.
+
+Example: 
+1. @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+2. private List<Address> addresses;
 
 ### FaceType
-1. Default type is LAZY
-2. EAGER means it will be loaded when other dependencies will be loaded 
-3. LAZY means it will be loaded when we will use 
+0. It is used in child side.
+1. Default type is LAZY.
+2. EAGER means it will be loaded as soon as the code is executed.
+3. LAZY delays the initialization of a resource.
+
+Example: 
+1. @ManyToOne(fetch = FetchType.LAZY)
+2. private Person person;
 
 ### mappedBy
-1. MappedBy tells hibernate that the foreign key for the relationship is on the other side.
+1. It is used in parent side
+2. MappedBy maps the parent entity which is the property in side the child.
 
-
+Example: 
+1. @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+2. private List<Address> addresses;
 
 
 ### Normalization
