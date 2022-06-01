@@ -34,8 +34,10 @@ public class Address {
 3. If we use specific type then it effects for that type only.
 
 Example: 
-1. @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-2. private List<Address> addresses;
+```
+@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+private List<Address> addresses;
+```
 
 ### FaceType
 0. It is used in child side.
@@ -44,17 +46,19 @@ Example:
 3. LAZY delays the initialization of a resource.
 
 Example: 
-1. @ManyToOne(fetch = FetchType.LAZY)
-2. private Person person;
-
+```
+@ManyToOne(fetch = FetchType.LAZY)
+private Person person;
+```
 ### mappedBy
 1. It is used in parent side
 2. MappedBy maps the parent entity which is the property in side the child.
 
 Example: 
-1. @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-2. private List<Address> addresses;
-
+```
+@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+private List<Address> addresses;
+```
 
 ### Normalization
 NORMALIZATION is a database design technique that reduces data redundancy and eliminates undesirable characteristics like Insertion, Update and Deletion Anomalies. Normalization rules divides larger tables into smaller tables and links them using relationships. The purpose of Normalization in SQL is to eliminate redundant (repetitive) data and ensure data is stored logically.
