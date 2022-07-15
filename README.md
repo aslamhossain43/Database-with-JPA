@@ -1,6 +1,7 @@
 # Database-with-JPA
 ## Technologies : Spring boot,jpa,mysql,hibernate
 -------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
+https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-bidirectional-mapping.html
 ## Parent
 ```
 @Entity
@@ -19,6 +20,7 @@ public class Address {
 }
 ``` 
 -------------------------------------------------------Unidirectional One-To-One Relationship-------------------------------
+https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-unidirectional-mapping.html
 ## Parent
 ```
 @Entity
@@ -34,6 +36,81 @@ public class Order {
 public class Address {
 }
 ``` 
+-------------------------------------------------------Bidirectional One-To-Many Relationship-------------------------------
+https://www.javaguides.net/2019/08/jpa-hibernate-one-to-many-bidirectional-mapping-example.html
+## Parent
+```
+@Entity
+public class Order {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
+    private Set<OrderItem> orderItems = new HashSet<>();
+}
+```
+## Child
+```
+@Entity
+public class OrderItem {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+}
+``` 
+-------------------------------------------------------Unidirectional One-To-Many Relationship-------------------------------
+https://www.javaguides.net/2022/02/spring-data-jpa-one-to-many-unidirectional-mapping.html
+## Parent
+```
+@Entity
+public class Order {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Set<OrderItem> orderItems = new HashSet<>();
+}
+```
+## Child
+```
+@Entity
+public class Address {
+}
+```
+-------------------------------------------------------Bidirectional Many-To-Many Relationship-------------------------------
+https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-bidirectional-mapping.html
+## Parent
+```
+@Entity
+public class User {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+}
+```
+## Child
+```
+@Entity
+public class Role {
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER,mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+}
+``` 
+-------------------------------------------------------Unidirectional Many-To-Many Relationship-------------------------------
+https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-Unidirectional-mapping.html
+## Parent
+```
+@Entity
+public class User {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+}
+```
+## Child
+```
+@Entity
+public class Role {
+}
+``` 
+
 ### CascadeType
 1. It is used in parent side.
 2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity.
