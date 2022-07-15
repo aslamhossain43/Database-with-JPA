@@ -1,8 +1,8 @@
 # Database-with-JPA
-## Technologies : Spring boot,jpa,mysql,hibernate
+## Entities
 -------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
 https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-bidirectional-mapping.html
-## Parent
+### Parent
 ```
 @Entity
 public class Order {
@@ -10,7 +10,7 @@ public class Order {
     private Address billingAddress;
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class Address {
@@ -21,7 +21,7 @@ public class Address {
 ``` 
 -------------------------------------------------------Unidirectional One-To-One Relationship-------------------------------
 https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-unidirectional-mapping.html
-## Parent
+### Parent
 ```
 @Entity
 public class Order {
@@ -30,7 +30,7 @@ public class Order {
     private Address billingAddress;
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class Address {
@@ -38,7 +38,7 @@ public class Address {
 ``` 
 -------------------------------------------------------Bidirectional One-To-Many Relationship-------------------------------
 https://www.javaguides.net/2019/08/jpa-hibernate-one-to-many-bidirectional-mapping-example.html
-## Parent
+### Parent
 ```
 @Entity
 public class Order {
@@ -46,7 +46,7 @@ public class Order {
     private Set<OrderItem> orderItems = new HashSet<>();
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class OrderItem {
@@ -57,7 +57,7 @@ public class OrderItem {
 ``` 
 -------------------------------------------------------Unidirectional One-To-Many Relationship-------------------------------
 https://www.javaguides.net/2022/02/spring-data-jpa-one-to-many-unidirectional-mapping.html
-## Parent
+### Parent
 ```
 @Entity
 public class Order {
@@ -66,7 +66,7 @@ public class Order {
     private Set<OrderItem> orderItems = new HashSet<>();
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class Address {
@@ -74,7 +74,7 @@ public class Address {
 ```
 -------------------------------------------------------Bidirectional Many-To-Many Relationship-------------------------------
 https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-bidirectional-mapping.html
-## Parent
+### Parent
 ```
 @Entity
 public class User {
@@ -84,7 +84,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class Role {
@@ -94,7 +94,7 @@ public class Role {
 ``` 
 -------------------------------------------------------Unidirectional Many-To-Many Relationship-------------------------------
 https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-Unidirectional-mapping.html
-## Parent
+### Parent
 ```
 @Entity
 public class User {
@@ -104,12 +104,17 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 }
 ```
-## Child
+### Child
 ```
 @Entity
 public class Role {
 }
 ``` 
+## Entity Inheritance
+
+
+
+
 
 ### CascadeType
 1. It is used in parent side.
@@ -159,28 +164,28 @@ Here is a list of Normal Forms
 7. 6NF (Sixth Normal Form)
 
 
-## 1NF (First Normal Form)
+### 1NF (First Normal Form)
 1. Each attribute/column name must be unique.
 2. Each cell should contain a single value.
 3. Each row must be unique.
 4. Choose a primary key(if not possible then choose a candidate key)
 
-## Prime attributes 
+### Prime attributes 
 The attributes which are used to form a candidate key are called prime attributes.
-## Non-Prime attributes 
+### Non-Prime attributes 
 The attributes which are not used to form a candidate key are called non-prime attributes.
-## Functional dependency
+### Functional dependency
 X->Y here value of Y depends on X. It is called functional dependency.
-## Partial dependency
+### Partial dependency
 If a,b prime attributes and c non-prime attributes then if c depends either a or b then it is called partial dependency.
-## Transitive dependency
+### Transitive dependency
 If X->Y and Y->Z then we can say X->Z this is called transitive dependency
 
-## 2NF (Second Normal Form)
+### 2NF (Second Normal Form)
 1. It should be 1NF.
 2. It should not have partial dependency.
 
-## 3NF (Third Normal Form)
+### 3NF (Third Normal Form)
 1. It should be 2NF.
 2. It doesn't have transitive dependency.
 3. All transitive dependencies is removed to place in another table.
