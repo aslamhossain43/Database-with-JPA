@@ -1,31 +1,37 @@
 # Database-with-JPA
 ## Technologies : Spring boot,jpa,mysql,hibernate
--------------------------------------------------------Read Carefully-------------------------------
+-------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
 ## Parent
 ```
 @Entity
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+public class Order {
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    private Address billingAddress;
 }
 ```
 ## Child
 ```
 @Entity
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String street;
-    private int houseNumber;
-    private String city;
-    private int zipCode;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Person person;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
+}
+``` 
+-------------------------------------------------------Unidirectional One-To-One Relationship-------------------------------
+## Parent
+```
+@Entity
+public class Order {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
+    private Address billingAddress;
+}
+```
+## Child
+```
+@Entity
+public class Address {
 }
 ``` 
 ### CascadeType
