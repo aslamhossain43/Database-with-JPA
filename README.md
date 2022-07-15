@@ -1,4 +1,5 @@
 # Database-with-JPA
+# JPA All >>> https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html
 ## Entities
 -------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
 https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-bidirectional-mapping.html
