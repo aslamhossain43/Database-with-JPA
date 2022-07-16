@@ -1,6 +1,7 @@
 # Database-with-JPA
 # JPA All >>> https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html
 ## Entities
+https://docs.oracle.com/javaee/6/tutorial/doc/bnbqa.html
 -------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
 https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-bidirectional-mapping.html
 ### Parent
@@ -112,7 +113,71 @@ public class Role {
 }
 ``` 
 ## Entity Inheritance
+https://docs.oracle.com/javaee/6/tutorial/doc/bnbqn.html
 
+Entity classes can extend non-entity classes, and non-entity classes can extend entity classes. Entity classes can be both abstract and concrete.
+
+### Abstract Entities
+Abstract entities are like concrete entities.Abstract entities can be queried just like concrete entities.If an abstract entity is the target of a query, the query operates on all the concrete subclasses of the abstract entity:
+```
+@Entity
+public abstract class Employee {
+    @Id
+    protected Integer employeeId;
+    ...
+}
+@Entity
+public class FullTimeEmployee extends Employee {
+    protected Integer salary;
+    ...
+}
+@Entity
+public class PartTimeEmployee extends Employee {
+    protected Float hourlyWage;
+}
+
+```
+### Mapped Superclasses
+These superclasses are most often used when you have state and mapping information common to multiple entity classes.
+```
+@MappedSuperclass
+public class Employee {
+    @Id
+    protected Integer employeeId;
+    ...
+}
+@Entity
+public class FullTimeEmployee extends Employee {
+    protected Integer salary;
+    ...
+}
+@Entity
+public class PartTimeEmployee extends Employee {
+    protected Float hourlyWage;
+    ...
+}
+
+```
+### Entity Inheritance Mapping Strategies
+The following mapping strategies are used to map the entity data to the underlying database:
+```
+public enum InheritanceType {
+    SINGLE_TABLE,
+    JOINED,
+    TABLE_PER_CLASS
+};
+
+```
+### The Single Table per Class Hierarchy Strategy
+All classes in the hierarchy are mapped to a single table in the database.This is default.
+
+
+### The Table per Concrete Class Strategy
+Each concrete class is mapped to a separate table in the database.All fields or properties in the class, including inherited fields or properties, are mapped to columns in the class’s table in the database.
+
+
+### The Joined Subclass Strategy
+The root of the class hierarchy is represented by a single table, and each subclass has a separate table that contains only those fields specific to that subclass.
 
 
 
