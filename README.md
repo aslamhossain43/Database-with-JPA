@@ -179,6 +179,12 @@ Each concrete class is mapped to a separate table in the database.All fields or 
 ### The Joined Subclass Strategy
 The root of the class hierarchy is represented by a single table, and each subclass has a separate table that contains only those fields specific to that subclass.
 
+## Managing Entities
+https://docs.oracle.com/javaee/6/tutorial/doc/bnbqw.html
+
+
+
+
 
 
 
