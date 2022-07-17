@@ -171,10 +171,8 @@ public enum InheritanceType {
 ### The Single Table per Class Hierarchy Strategy
 All classes in the hierarchy are mapped to a single table in the database.This is default.
 
-
 ### The Table per Concrete Class Strategy
 Each concrete class is mapped to a separate table in the database.All fields or properties in the class, including inherited fields or properties, are mapped to columns in the class’s table in the database.
-
 
 ### The Joined Subclass Strategy
 The root of the class hierarchy is represented by a single table, and each subclass has a separate table that contains only those fields specific to that subclass.
@@ -226,10 +224,6 @@ try {
   utx.rollback();
 }
 ```
-
-
-
-
 ### CascadeType
 1. It is used in parent side.
 2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity.
@@ -240,7 +234,6 @@ Example:
 @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 private List<Address> addresses;
 ```
-
 ### FaceType
 0. It is used in child side.
 1. Default type is LAZY.
@@ -261,10 +254,8 @@ Example:
 @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 private List<Address> addresses;
 ```
-
 ### Normalization
 NORMALIZATION is a database design technique that reduces data redundancy and eliminates undesirable characteristics like Insertion, Update and Deletion Anomalies. Normalization rules divides larger tables into smaller tables and links them using relationships. The purpose of Normalization in SQL is to eliminate redundant (repetitive) data and ensure data is stored logically.
-
 
 ### Database Normal Forms
 Here is a list of Normal Forms
@@ -276,7 +267,6 @@ Here is a list of Normal Forms
 5. 4NF (Fourth Normal Form)
 6. 5NF (Fifth Normal Form)
 7. 6NF (Sixth Normal Form)
-
 
 ### 1NF (First Normal Form)
 1. Each attribute/column name must be unique.
