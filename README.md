@@ -182,8 +182,50 @@ The root of the class hierarchy is represented by a single table, and each subcl
 ## Managing Entities
 https://docs.oracle.com/javaee/6/tutorial/doc/bnbqw.html
 
+Entities are managed by the entity manager which is associated with a persistence context: a set of managed entity instances that exist in a particular data store.
+### The EntityManager Interface
+The EntityManager API creates and removes persistent entity instances, finds entities by the entity’s primary key, and allows queries to be run on entities.
 
+### Container-Managed Entity Managers
+An EntityManager instance’s persistence context is automatically propagated by the container to all application components that use the EntityManager.
+To obtain an EntityManager instance, inject the entity manager into the application component:
+```
+@PersistenceContext
+EntityManager em;
+```
+### Application-Managed Entity Managers
+the persistence context is not propagated to application components, and the lifecycle of EntityManager instances is managed by the application.Applications create EntityManager instances in this case by using the createEntityManager method of javax.persistence.EntityManagerFactory.
+```
+@PersistenceUnit
+EntityManagerFactory emf;
+Then obtain an EntityManager from the EntityManagerFactory instance:
 
+EntityManager em = emf.createEntityManager();
+```
+The javax.transaction.UserTransaction interface defines methods to begin, commit, and roll back transactions.
+```
+@Resource
+UserTransaction utx;
+```
+The following example shows how to manage transactions in an application that uses an application-managed entity manager:
+```
+@PersistenceContext
+EntityManagerFactory emf;
+EntityManager em;
+@Resource
+UserTransaction utx;
+...
+em = emf.createEntityManager();
+try {
+  utx.begin();
+  em.persist(SomeEntity);
+  em.merge(AnotherEntity);
+  em.remove(ThirdEntity);
+  utx.commit();
+} catch (Exception e) {
+  utx.rollback();
+}
+```
 
 
 
