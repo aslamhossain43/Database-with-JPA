@@ -1,5 +1,6 @@
-# Database-with-JPA
-# JPA All >>> https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html
+## Database-with-JPA
+## JPA Inheritence: https://www.javatpoint.com/jpa-inheritance-overview
+## JPA All >>> https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html
 ## Entities
 https://docs.oracle.com/javaee/6/tutorial/doc/bnbqa.html
 -------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
