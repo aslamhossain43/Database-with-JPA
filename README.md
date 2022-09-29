@@ -1,230 +1,58 @@
-## Database-with-JPA
-## JPA Inheritence: https://www.javatpoint.com/jpa-inheritance-overview
-## JPA All >>> https://docs.oracle.com/javaee/6/tutorial/doc/bnbpz.html
-## Entities
-https://docs.oracle.com/javaee/6/tutorial/doc/bnbqa.html
--------------------------------------------------------Bidirectional One-To-One Relationship-------------------------------
-https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-bidirectional-mapping.html
-### Parent
-```
-@Entity
-public class Order {
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
-    private Address billingAddress;
-}
-```
-### Child
-```
-@Entity
-public class Address {
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Order order;
-}
-``` 
--------------------------------------------------------Unidirectional One-To-One Relationship-------------------------------
-https://www.javaguides.net/2022/02/spring-data-jpa-one-to-one-unidirectional-mapping.html
-### Parent
-```
-@Entity
-public class Order {
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
-    private Address billingAddress;
-}
-```
-### Child
-```
-@Entity
-public class Address {
-}
-``` 
--------------------------------------------------------Bidirectional One-To-Many Relationship-------------------------------
-https://www.javaguides.net/2019/08/jpa-hibernate-one-to-many-bidirectional-mapping-example.html
-### Parent
-```
-@Entity
-public class Order {
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order")
-    private Set<OrderItem> orderItems = new HashSet<>();
-}
-```
-### Child
-```
-@Entity
-public class OrderItem {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private Order order;
-}
-``` 
--------------------------------------------------------Unidirectional One-To-Many Relationship-------------------------------
-https://www.javaguides.net/2022/02/spring-data-jpa-one-to-many-unidirectional-mapping.html
-### Parent
-```
-@Entity
-public class Order {
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Set<OrderItem> orderItems = new HashSet<>();
-}
-```
-### Child
-```
-@Entity
-public class Address {
-}
-```
--------------------------------------------------------Bidirectional Many-To-Many Relationship-------------------------------
-https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-bidirectional-mapping.html
-### Parent
-```
-@Entity
-public class User {
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles = new HashSet<>();
-}
-```
-### Child
-```
-@Entity
-public class Role {
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER,mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
-}
-``` 
--------------------------------------------------------Unidirectional Many-To-Many Relationship-------------------------------
-https://www.javaguides.net/2022/03/spring-data-jpa-many-to-many-Unidirectional-mapping.html
-### Parent
-```
-@Entity
-public class User {
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles = new HashSet<>();
-}
-```
-### Child
-```
-@Entity
-public class Role {
-}
-``` 
-## Entity Inheritance
-https://docs.oracle.com/javaee/6/tutorial/doc/bnbqn.html
+## Database-with-JPA - https://vladmihalcea.com
 
-Entity classes can extend non-entity classes, and non-entity classes can extend entity classes. Entity classes can be both abstract and concrete.
 
-### Abstract Entities
-Abstract entities are like concrete entities.Abstract entities can be queried just like concrete entities.If an abstract entity is the target of a query, the query operates on all the concrete subclasses of the abstract entity:
-```
-@Entity
-public abstract class Employee {
-    @Id
-    protected Integer employeeId;
-    ...
-}
-@Entity
-public class FullTimeEmployee extends Employee {
-    protected Integer salary;
-    ...
-}
-@Entity
-public class PartTimeEmployee extends Employee {
-    protected Float hourlyWage;
-}
+-----Hibernate & JPA-----
+>N-tier architecture-- 
+>>Presentation: 
+>>Service:
+>>Domain model: here JPA works
+>>Persistance: Here hibernate works
 
-```
-### Mapped Superclasses
-These superclasses are most often used when you have state and mapping information common to multiple entity classes.
-```
-@MappedSuperclass
-public class Employee {
-    @Id
-    protected Integer employeeId;
-    ...
-}
-@Entity
-public class FullTimeEmployee extends Employee {
-    protected Integer salary;
-    ...
-}
-@Entity
-public class PartTimeEmployee extends Employee {
-    protected Float hourlyWage;
-    ...
-}
 
-```
-### Entity Inheritance Mapping Strategies
-The following mapping strategies are used to map the entity data to the underlying database:
-```
-public enum InheritanceType {
-    SINGLE_TABLE,
-    JOINED,
-    TABLE_PER_CLASS
-};
 
-```
-### The Single Table per Class Hierarchy Strategy
-All classes in the hierarchy are mapped to a single table in the database.This is default.
+>Hibernate architecture:
+>>Configuration: It reads config properties from spring properties file to connect hibernate to database.
+>>SessionFactory: When starting spring boot then spring container creates SessionFactory bean by reading Configuration. Per application per SessionFactory(singleton).  
+>>Session: It provides query according to model mapping. every request has new session.
+>>Query(it is called API): It persists object to 1st level cache. If commit then go to database. 
+>>1st level cache: For same request(same session) same query is used by 1st level cache to improve the performance. For another request (another session) and another query is created then same 1st level cache is not usable that's a problem.
+>>2nd level cache: It is not related to hibernate. It is another implementation. It is a solution of 1st level cache. It is related to SessionFactory so for every diffrent session it is shared. so 1st level cache is shared by diffrent request.
+>>Transaction: It is for persistence consistency. If transaction.commit() then save data. If transaction fails then rollback.
 
-### The Table per Concrete Class Strategy
-Each concrete class is mapped to a separate table in the database.All fields or properties in the class, including inherited fields or properties, are mapped to columns in the class’s table in the database.
+>JPA:
+>>EntityManagerFactory: In JPA, SessionFactory is called EntityManagerFactory. 
+>>EntityManager: In JPA, Session it is called EntityManager.
+>>Persistence context: In JPA, 1st level cache is called persistence context.
+>>Hibernate dialect: It allows Hibernate to generate SQL optimized for a particular relational database.
+>>Entity("person") vs Table("employee"): Entity is used in JPQL and Table is used in native/raw query. 
+>>Natural key vs Surrogate key: String is natural key and Long is sarrogate key. best practice is surrogate key.
+>>The orphanRemoval attribute is going to instruct the JPA provider to trigger a remove entity state transition when a child entity is no longer referenced by its parent entity
 
-### The Joined Subclass Strategy
-The root of the class hierarchy is represented by a single table, and each subclass has a separate table that contains only those fields specific to that subclass.
+>Id generation strategies:
+>>@Identity: It increments automatically primary key( table1 - 1,2,3    table2 - 1,2,3) .It doesn't effect other tables and other column. 
+>>@Secuence: It is not supported by every database. It share secuence in every table( table1 - 1,4    table2 - 2,3). It is better from identity for table merging.
+>>@Auto: Hibernate decides which strategy is best.
+>>@Column: It is used to define some properties.
+>>@Temporal: It is used to cut timstamp and other things from date.
+>>@Transient: It doesn't create column in database.
 
-## Managing Entities
-https://docs.oracle.com/javaee/6/tutorial/doc/bnbqw.html
+>Entity lifecycle: It has 4 states:
+>>Transient: Person person = new Person(). When it is created then it is in transient states. It has no primary key.
+>>Persisted/Managed: em.persist(person) it is called persisted. It is moved inside the 1st level cache/persitent context. If em.commit() then go to database. to update value must call before commit.
+>>Detached: It has a record in database. em.detached(); em.close(); It moves from persistent context/1st level cache to transient state but it has primary key. If we want to persist again then em.merge(); It creates a copy of person and go to persistent context/1st level cache;
+>>Removed: In database has a record. em.remove(); It removes data from database.
 
-Entities are managed by the entity manager which is associated with a persistence context: a set of managed entity instances that exist in a particular data store.
-### The EntityManager Interface
-The EntityManager API creates and removes persistent entity instances, finds entities by the entity’s primary key, and allows queries to be run on entities.
+>Everything in database is always bi-directional. It has no Uni-directional so to handle this need associations.
+>ORM Associations: 
+>>Uni-directional: 
+>>Bi-directional: 
 
-### Container-Managed Entity Managers
-An EntityManager instance’s persistence context is automatically propagated by the container to all application components that use the EntityManager.
-To obtain an EntityManager instance, inject the entity manager into the application component:
-```
-@PersistenceContext
-EntityManager em;
-```
-### Application-Managed Entity Managers
-the persistence context is not propagated to application components, and the lifecycle of EntityManager instances is managed by the application.Applications create EntityManager instances in this case by using the createEntityManager method of javax.persistence.EntityManagerFactory.
-```
-@PersistenceUnit
-EntityManagerFactory emf;
-Then obtain an EntityManager from the EntityManagerFactory instance:
+>Single table: Every full hierarchy has single table.
+>Joined table: Diffrent class has diffrent table(super class has table also) but same id is shared.
+>Table per class (per concrete class):  Diffrent sub class has diffrent table(super class has  no table). It is best to me.
 
-EntityManager em = emf.createEntityManager();
-```
-The javax.transaction.UserTransaction interface defines methods to begin, commit, and roll back transactions.
-```
-@Resource
-UserTransaction utx;
-```
-The following example shows how to manage transactions in an application that uses an application-managed entity manager:
-```
-@PersistenceContext
-EntityManagerFactory emf;
-EntityManager em;
-@Resource
-UserTransaction utx;
-...
-em = emf.createEntityManager();
-try {
-  utx.begin();
-  em.persist(SomeEntity);
-  em.merge(AnotherEntity);
-  em.remove(ThirdEntity);
-  utx.commit();
-} catch (Exception e) {
-  utx.rollback();
-}
-```
+
+
 ### CascadeType.REMOVE vs Orphan Removal
 
 1. Orphan Removal = true: When one entity is removed from parent then only parent-child association is detached 
