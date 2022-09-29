@@ -254,12 +254,8 @@ public class University {
 1. Default type is EAGER.
 2. EAGER means it will be loaded from database with other fields(id, name, address).
 3. LAZY means it will be loaded from database on-demand(when we will call university.getStudents()).
+4. Best practice is LAZY because EAGER has performance issue.
 
-Example: 
-```
-@ManyToOne(fetch = FetchType.LAZY)
-private Person person;
-```
 ### mappedBy
 1. It is used in parent side
 2. MappedBy maps the parent entity which is the property in side the child.
