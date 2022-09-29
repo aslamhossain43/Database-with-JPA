@@ -279,9 +279,24 @@ public class University {
 3. LAZY means it will be loaded from database on-demand(when we will call university.getStudents()).
 4. Best practice is LAZY because EAGER has performance issue.
 
-### mappedBy
-1. It is used in parent side
-2. MappedBy maps the parent entity which is the property in side the child.
+### @JoinColumn vs mappedBy
+```
+@Entity
+public class Company {
+    @OneToMany(mappedBy = "company", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Branch> branches;
+}
+
+@Entity
+public class Branch {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private Company company;
+}
+
+```
+1. @JoinColumn: It indicates that this entity is the owner and the table has a column of foreign key.
+2. MappedBy: It links by "mappedBy" to make fully bidirectional. It is in parent side for one-to-many.
 
 Example: 
 ```
