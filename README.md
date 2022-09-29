@@ -226,15 +226,32 @@ try {
 }
 ```
 ### CascadeType
-1. It is used in parent side.
-2. CascadeType.ALL means if we insert, delete anything in owner entity then it effects in child entity.
-3. If we use specific type then it effects for that type only.
+```
+@Entity
+public class Post {
+ 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+ 
+    private String name;
+ 
+    @OneToOne(mappedBy = "post",
+        cascade = CascadeType.ALL, orphanRemoval = true)
+    private PostDetails details;
+}
+```
+1. Cascading only makes sense only for Parent – Child associations.
+2. The Parent entity state transition being cascaded to its Child entities.
+3. If we use specific type then it effects for that child only.
 
-Example: 
-```
-@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-private List<Address> addresses;
-```
+CascadeType.PERSIST : cascade type presist means that save() or persist() operations cascade to related entities.
+CascadeType.MERGE : cascade type merge means that related entities are merged when the owning entity is merged.
+CascadeType.REFRESH : cascade type refresh does the same thing for the refresh() operation.
+CascadeType.REMOVE : cascade type remove removes all related entities association with this setting when the owning entity is deleted.
+CascadeType.DETACH : cascade type detach detaches all related entities if a “manual detach” occurs.
+CascadeType.ALL : cascade type all is shorthand for all of the above cascade operations.
+
 ### FaceType
 ```
 @Entity
