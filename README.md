@@ -1,4 +1,5 @@
 ## Database-with-JPA - https://vladmihalcea.com
+```
 
 
 -----Hibernate & JPA-----
@@ -52,6 +53,7 @@
 >Table per class (per concrete class):  Diffrent sub class has diffrent table(super class has  no table). It is best to me.
 
 
+```
 
 ### CascadeType.REMOVE vs Orphan Removal
 
