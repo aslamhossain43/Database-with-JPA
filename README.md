@@ -236,10 +236,24 @@ Example:
 private List<Address> addresses;
 ```
 ### FaceType
-0. It is used in child side.
-1. Default type is LAZY.
-2. EAGER means it will be loaded as soon as the code is executed.
-3. LAZY delays the initialization of a resource.
+```
+@Entity
+public class University {
+
+    @Id
+    private String id;
+
+    private String name;
+
+    private String address;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Student> students;
+}
+```
+1. Default type is EAGER.
+2. EAGER means it will be loaded from database with other fields(id, name, address).
+3. LAZY means it will be loaded from database on-demand(when we will call university.getStudents()).
 
 Example: 
 ```
