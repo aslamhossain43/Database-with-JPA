@@ -225,6 +225,12 @@ try {
   utx.rollback();
 }
 ```
+### CascadeType.REMOVE vs Orphan Removal
+
+1. Orphan Removal = true: When one entity is removed from parent then only parent-child association is detached 
+but not deleted from database because child may have other association in whole database. If child has no other association in whole database then it will be removed from database. 
+3. CascadeType.REMOVE: When one entity is removed from parent then child is deleted.
+
 ### CascadeType
 ```
 @Entity
