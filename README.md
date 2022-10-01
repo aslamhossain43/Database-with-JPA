@@ -53,6 +53,28 @@
 >Table per class (per concrete class):  Diffrent sub class has diffrent table(super class has  no table). It is best to me.
 
 
+>Primary key: It must be not null and unique.
+>Candidate key: The minimal set of attributes that can uniquely identify a tuple/row is known as a candidate key. It can contain null values but will not consider same value. Primary key is from candidate key.
+>Alternative key: Without primary key other candidate keys are alternative keys 
+>Super key: Super key is a single or a group of multiple keys that can uniquely identify tuple/row. Super key must contain single or multiple candidate key.
+
+
+
+>Constraints: It is applied on a column. It has many types:
+>>Unique constraints: It can be used if column has unique value.
+>>Not null constraints: It can be used if column has no null value. It may have duplicate values.
+>>Default constraints: During table creation a default value is provided which will be inserted if no value in next insertion.
+>>Check constraints: During table creation a condition is added. During data insertion the condition should be satisfied.
+>>Key constraints: It is 2 types:
+>>>Primary key: Constraints can be applied on primary key.
+>>>Foreign key: Constraints can be applied on primary key. Example:     @JoinColumn(name = "object_uuid", referencedColumnName = "uuid", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+
+>Types of relationship: It is 4 types:
+>>One-To-One: 
+>>One-To-Many: 
+>>Many-To-One: 
+>>Many-To-Many: 
+
 ```
 
 ### CascadeType.REMOVE vs Orphan Removal
