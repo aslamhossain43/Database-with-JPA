@@ -113,17 +113,13 @@ CascadeType.ALL : cascade type all is shorthand for all of the above cascade ope
 ### FaceType
 ```
 @Entity
-public class University {
+public class Comment {
 
     @Id
     private String id;
 
-    private String name;
-
-    private String address;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Student> students;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Post post;
 }
 ```
 1. Default type is EAGER.
